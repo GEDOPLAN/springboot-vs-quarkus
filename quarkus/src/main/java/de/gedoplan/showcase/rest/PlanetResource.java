@@ -12,7 +12,8 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
+
+import org.eclipse.microprofile.metrics.annotation.Counted;
 
 import de.gedoplan.showcase.domain.Planet;
 import de.gedoplan.showcase.service.PlanetService;
@@ -40,6 +41,7 @@ public class PlanetResource {
   @GET
   @Produces(MediaType.APPLICATION_JSON)
   @Path("{id1}-{id2}")
+  @Counted
   public double getGravity(@PathParam("id1") String id1, @PathParam("id2") String id2) {
     return this.planetService.getGravity(id1, id2);
   }

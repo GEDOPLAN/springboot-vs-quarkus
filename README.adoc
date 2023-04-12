@@ -1,0 +1,120 @@
+= springboot-vs-quarkus.git
+Demo-Projekt zum GEDOPLAN-Talk "Micro Framework Battle: Quarkus vs. Spring Boot"
+
+. Überblick
++
+In diesem Projekt werden zwei Anwendungen mit gleicher Fachlichkeit realisiert - einmal mit Spring Boot und einmal mit Quarkus.
+
+** Fachlichkeit:
++
+Die Anwendungen verwalten die Daten von Planeten in einer Datenbank und bieten ein einfaches REST API an:
++
+[cols="3,1,2"]
+|===
+|URL|Methode|Beschreibung
+
+|http://localhost:8080/api/planets
+|GET
+|Liefere alle Planeten
+
+|http://localhost:8080/api/planets
+|POST
+|Füge neuen Planeten hinzu
+
+|http://localhost:8080/api/planets/{id1}-{id2}
+|GET
+|Liefere die Gravitation zwischen zwei Planeten
+
+|===
++
+Im Verzeichnis `scripts` befinden sich einige Shell Scripts zum Aufruf der API.
+
+** Technische Bestandteile:
++
+Um die Beispielanwendungen zwar als Demo überschaubar, aber dennoch realitätsnah zu gestalten, sind die folgenden Bestandteile enthalten:
+
+*** Als Datenbank wird PostgreSQL verwendet.
+
+*** Die DB-Anbindung geschieht mittels Jakarta Persistence und Hibernate, allerdings mit den Enhancements der beiden Frameworks (Spring Data JPA bzw. Panache).
+
+*** Das REST API wird mit dem jeweiligen Framework ohne Besonderheiten realisiert.
+
+*** Zur anwendungsinternen Verknüpfung wird (natürlich!) Dependency Injection verwendet.
+
+*** Die Anwendungen sind über Umgebungsvariablen (u. a.) konfigurierbar:
++
+[cols="1,1,1"]
+|===
+|Variable|Bedeutung|Beispiel
+
+|`G_CONST`
+|Gravitationskonstante
+|`6.67430e-11` +
+(Default)
+
+|`MAINT_START`
+|Wartungsfenster-Beginn im ISO-Format `yyyy-MM-ddTHH:mm` +
+(Verwendung s. Health Checking weiter unten)
+|`2023-04-20T18:45` 
+
+|`MAINT_DURATION`
+|Wartungsfenster-Dauer im Duration Format `PnDTnHnMn.nS`
+|`PT15M` +
+(Default) 
+
+|===
+
+*** Für das REST API wird eine OpenAPI-Beschreibung veröffentlicht. Zudem ist das API auch probeweise über ein OpenAPI UI (aka Swagger UI) zu nutzen.
+
+*** Die Anwendungen bieten einen Health Check Endpoint für ihre _Readiness_ an. Sie sind _ready_, wenn die DB-Verbindung steht und wir uns nicht gerade im Wartungsfenster befinden.
+
+*** Die Anwendungen bieten einen Metrics Endpunkt zur Abfrage diverser Metriken an. Neben System-Metriken (CPU-Auslasrung etc.) kann als anwendungsspezifische Metrik abgefragt werden, wie oft bisher der Endpunkt zur Berechnung der Gravitation aufgerufen wurde.
+
+*** Die Anwendungen enthalten (einfache) Integrationstests.
+
+. Realisierung / Besonderheiten
+
+.. Spring Boot
+
+.. Quarkus
+
+*** Dev Mode:
+**** Entwicklung mit beliebiger IDE und parallel laufendem `mvn quarkus:dev`.
+
+*** DB:
+**** Dependency: `io.quarkus:quarkus-jdbc-postgresql`.
+**** Im Dev Mode wird automatisch ein Testcontainer genutzt.
+
+*** Persistenzframework:
+**** Dependency: `io.quarkus:quarkus-hibernate-orm-rest-data-panache`.
+**** Bietet Standard-JPA + CRUD/Finder/... (Active Record oder Repository).
+
+*** REST Provider:
+**** Dependencies: `io.quarkus:quarkus-resteasy-reactive`, `io.quarkus:quarkus-resteasy-reactive-jsonb`.
+**** Jakarta RESTful Webservices (Classic oder Reactive).
+
+*** (Microprofile) Config:
+**** (Default-)Werte in `application.properties`.
+**** Injection mit `@Inject @ConfigProperty`.
+
+*** OpenAPI:
+**** Dependency: `io.quarkus:quarkus-smallrye-openapi`.
+**** OpenAPI-Endpunkt: http://localhost:8080/q/openapi.
+**** Im Dev Mode auch Swagger UI: http://localhost:8080/q/swagger-ui.
+
+*** Health Checks:
+**** Dependency: `io.quarkus:quarkus-smallrye-health`.
+**** Endpunkte: http://localhost:8080/q/health/{started|live|ready}.
+**** DB Readiness ist auto-konfiguriert.
+**** Falls ein Wartungsfenster konfiguriert ist (s. o.), meldet die Anwendung in dieser Zeit _not ready_. +
+Die Klasse `MaintenanceReadinessCheck` implementiert diesen Custom Check.
+
+*** Metrics:
+**** Dependency: `io.quarkus:quarkus-smallrye-metrics`.
+**** Endpunkte: http://localhost:8080/q/metrics/{base|vendor|application} +
+(JSON mit Header `accept: application/json`).
+**** Applikations-Metrik z. B. mit `@Counted`.
+
+*** Tests:
+**** Es sind je ein White Box Test und Black Box Test vorhanden.
+**** Die Tests nutzen eine separate DB (via Dev Services / Testcontainers).

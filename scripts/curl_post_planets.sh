@@ -1,0 +1,8 @@
+curl localhost:8080/api/planets -X POST -H 'content-type: application/json' -d '{"id":"sol1", "name":"Mercury", "mass":"3.301e23"}'
+curl localhost:8080/api/planets -X POST -H 'content-type: application/json' -d '{"id":"sol2", "name":"Venus",   "mass":"4.875e24"}'
+curl localhost:8080/api/planets -X POST -H 'content-type: application/json' -d '{"id":"sol3", "name":"Earth",   "mass":"5.972e24"}'
+curl localhost:8080/api/planets -X POST -H 'content-type: application/json' -d '{"id":"sol4", "name":"Mars",    "mass":"6.417e23"}'
+curl localhost:8080/api/planets -X POST -H 'content-type: application/json' -d '{"id":"sol5", "name":"Jupiter", "mass":"1.899e27"}'
+curl localhost:8080/api/planets -X POST -H 'content-type: application/json' -d '{"id":"sol6", "name":"Saturn",  "mass":"5.683e26"}'
+curl localhost:8080/api/planets -X POST -H 'content-type: application/json' -d '{"id":"sol7", "name":"Uranus",  "mass":"8.681e25"}'
+curl localhost:8080/api/planets -X POST -H 'content-type: application/json' -d '{"id":"sol8", "name":"Neptun",  "mass":"1,024e26"}'

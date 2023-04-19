@@ -10,7 +10,7 @@
   <packaging>pom</packaging>
 
   <modules>
-    <!-- <module>springboot</module> -->
+    <module>springboot</module>
     <module>quarkus</module>
   </modules>
 

@@ -1,0 +1,48 @@
+spring:
+  application:
+    name: springboot
+  profiles:
+    active: '@profileActive@'
+
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://${db.host:localhost}:5432/showcase
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      ddl-auto: update
+
+logging:
+  level:
+    root: info
+    de.gedoplan.showcase: debug
+
+server:
+  servlet:
+    context-path: /api
+
+management:
+  endpoint:
+    health:
+      show-details: always
+      probes:
+        enabled: true
+      group:
+        readiness:
+          include:
+            - maintenance
+            - db
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  server:
+    port: 8081
+
+G_CONST: 6.67430e-11
+
+maintenance:
+  windows:
+    - start: 2023-04-20T18:45
+      duration: PT1H
+

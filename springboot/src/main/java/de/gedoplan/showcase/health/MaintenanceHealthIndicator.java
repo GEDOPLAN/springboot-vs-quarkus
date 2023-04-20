@@ -21,7 +21,7 @@ public class MaintenanceHealthIndicator implements HealthIndicator {
                 .map(w -> Health.outOfService()
                         .withDetail("Maintenance","active")
                         .withDetail("start",w.start().format(DateTimeFormatter.ISO_LOCAL_DATE_TIME))
-                        .withDetail("start",w.end().format(DateTimeFormatter.ISO_LOCAL_DATE_TIME))
+                        .withDetail("end",w.end().format(DateTimeFormatter.ISO_LOCAL_DATE_TIME))
                         .build())
                 .orElse(Health.up().withDetail("Maintenance","inactive").build());
     }

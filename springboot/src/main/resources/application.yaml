@@ -11,6 +11,9 @@ spring:
     database-platform: org.hibernate.dialect.PostgreSQLDialect
     hibernate:
       ddl-auto: update
+  devtools:
+    restart:
+      quiet-period: 900
 
 logging:
   level:
@@ -43,6 +46,6 @@ G_CONST: 6.67430e-11
 
 maintenance:
   windows:
-    - start: 2023-04-20T18:45
+    - start: 2023-04-20T14:40
       duration: PT1H
 

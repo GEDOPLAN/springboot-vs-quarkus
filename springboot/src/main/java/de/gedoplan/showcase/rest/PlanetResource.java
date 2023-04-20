@@ -3,6 +3,8 @@ package de.gedoplan.showcase.rest;
 import de.gedoplan.showcase.domain.Planet;
 import de.gedoplan.showcase.repository.PlanetRepository;
 import de.gedoplan.showcase.service.PlanetService;
+import io.micrometer.core.annotation.Counted;
+import io.micrometer.core.annotation.Timed;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;

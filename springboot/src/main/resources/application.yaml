@@ -13,6 +13,7 @@ spring:
     database-platform: org.hibernate.dialect.PostgreSQLDialect
     hibernate:
       ddl-auto: update
+
   devtools:
     restart:
       quiet-period: 900

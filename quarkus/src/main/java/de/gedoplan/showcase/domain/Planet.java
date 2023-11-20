@@ -4,6 +4,9 @@ import javax.json.bind.annotation.JsonbCreator;
 import javax.persistence.Entity;
 
 import de.gedoplan.baselibs.panache.entity.StringIdPanacheEntity;
+
+import java.util.Optional;
+
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -21,6 +24,11 @@ public class Planet extends StringIdPanacheEntity {
     super(id);
     this.name = name;
     this.mass = mass;
+  }
+
+  // Unused - just demonstrate Panache query methods
+  public static Optional<Planet> findByName(String name) {
+    return find("name", name).singleResultOptional();
   }
 
 }

@@ -6,4 +6,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface PlanetRepository extends JpaRepository<Planet, String> {
+  // Unused - just show Spring Data JPA magic
+  public Planet findByName(String name);
 }

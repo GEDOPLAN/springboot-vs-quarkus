@@ -7,6 +7,7 @@ import javax.inject.Inject;
 import javax.transaction.Transactional;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
+import javax.ws.rs.NotFoundException;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
@@ -21,7 +22,17 @@ import de.gedoplan.showcase.service.PlanetService;
 @ApplicationScoped
 @Path("planets")
 public class PlanetResource {
-  
+
+  // Using field injection here
+  // See below for contructor injection alternative
+  @Inject
+  PlanetService planetService;
+
+//  @Inject
+//  public PlanetResource(PlanetService planetService) {
+//    this.planetService = planetService;
+//  }
+
   @GET
   @Produces(MediaType.APPLICATION_JSON)
   public Collection<Planet> get() {
@@ -34,9 +45,6 @@ public class PlanetResource {
   public void post(Planet planet) {
     planet.persist();
   }
-
-  @Inject
-  PlanetService planetService;
 
   @GET
   @Produces(MediaType.APPLICATION_JSON)

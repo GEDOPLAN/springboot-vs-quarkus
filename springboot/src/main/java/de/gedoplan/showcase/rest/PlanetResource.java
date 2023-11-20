@@ -6,6 +6,8 @@ import de.gedoplan.showcase.service.PlanetService;
 import io.micrometer.core.annotation.Counted;
 import io.micrometer.core.annotation.Timed;
 import lombok.RequiredArgsConstructor;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,8 +18,17 @@ import java.util.Collection;
 @RequestMapping("planets")
 public class PlanetResource {
 
-    private final PlanetRepository planetRepository;
+    // Using Lombok magic:
+    // @RequiredArgsConstructor creates constructor with parameters for final fields
+    // See below for a non-Lombok alternative
     private final PlanetService planetService;
+    private final PlanetRepository planetRepository;
+
+//    @Autowired
+//    public PlanetResource(PlanetRepository planetRepository, PlanetService planetService) {
+//        this.planetRepository = planetRepository;
+//        this.planetService = planetService;
+//    }
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public Collection<Planet> get() {

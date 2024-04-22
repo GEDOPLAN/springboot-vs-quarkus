@@ -30,17 +30,17 @@ public class PlanetResource {
 //        this.planetService = planetService;
 //    }
 
-    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping
     public Collection<Planet> get() {
         return planetRepository.findAll();
     }
 
-    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping
     public void post(@RequestBody Planet planet) {
         planetRepository.save(planet);
     }
 
-    @GetMapping(path = "{id1}-{id2}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(path = "{id1}-{id2}")
     public double getGravity(@PathVariable String id1, @PathVariable String id2) {
         return this.planetService.getGravity(id1, id2);
     }

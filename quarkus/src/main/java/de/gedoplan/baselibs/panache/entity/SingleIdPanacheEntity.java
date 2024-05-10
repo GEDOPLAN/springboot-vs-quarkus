@@ -17,7 +17,7 @@ import java.util.concurrent.ConcurrentMap;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 
 import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
 

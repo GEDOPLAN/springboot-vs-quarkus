@@ -6,7 +6,7 @@
   <parent>
     <groupId>de.gedoplan</groupId>
     <artifactId>build-master</artifactId>
-    <version>2022.10.1</version>
+    <version>2024.2.2</version>
     <relativePath/>
   </parent>
 
@@ -17,7 +17,7 @@
   <properties>
     <quarkus.platform.artifact-id>quarkus-bom</quarkus.platform.artifact-id>
     <quarkus.platform.group-id>io.quarkus.platform</quarkus.platform.group-id>
-    <quarkus.platform.version>2.16.4.Final</quarkus.platform.version>
+    <quarkus.platform.version>3.10.0</quarkus.platform.version>
 
     <failsafe.useModulePath>false</failsafe.useModulePath>
   </properties>
@@ -129,7 +129,7 @@
   <repositories>
     <repository>
       <id>gedoplanPublic</id>
-      <url>https://service.gedoplan.de/nexus/content/groups/public</url>
+      <url>https://maven.gedoplan.de/repository/maven-public</url>
     </repository>
   </repositories>
   <profiles>

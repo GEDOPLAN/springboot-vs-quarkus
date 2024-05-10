@@ -5,8 +5,8 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Optional;
 
-import javax.enterprise.context.ApplicationScoped;
-import javax.inject.Inject;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.inject.Inject;
 
 import org.eclipse.microprofile.config.inject.ConfigProperty;
 import org.eclipse.microprofile.health.HealthCheck;
@@ -22,7 +22,7 @@ public class MaintenanceReadinessCheck implements HealthCheck {
   Optional<LocalDateTime> maintStartOptional;
 
   @Inject
-  @ConfigProperty(name = "MAINT_DURATION", defaultValue = "PT15M")
+  @ConfigProperty(name = "MAINT_DURATION")
   Duration maintDuration;
 
   @Override

@@ -1,7 +1,7 @@
 package de.gedoplan.showcase.domain;
 
-import javax.json.bind.annotation.JsonbCreator;
-import javax.persistence.Entity;
+import jakarta.json.bind.annotation.JsonbCreator;
+import jakarta.persistence.Entity;
 
 import de.gedoplan.baselibs.panache.entity.StringIdPanacheEntity;
 

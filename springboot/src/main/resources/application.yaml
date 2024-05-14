@@ -50,6 +50,6 @@ G_CONST: 6.67430e-11
 
 maintenance:
   windows:
-    - start: 2023-04-20T14:40
+    - start: 2024-05-16T13:00
       duration: PT1H
 

@@ -20,9 +20,6 @@ import io.restassured.common.mapper.TypeRef;
 @QuarkusTest
 public class PlanetResourceTest {
 
-  @Inject
-  PlanetService planetService;
-
   @BeforeAll
   @Transactional
   static void initTestData() {
